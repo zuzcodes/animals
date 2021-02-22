@@ -15,10 +15,15 @@ const Animal = {
 function start() {
     console.log("ready");
 
-    // TODO: add event-listeners to filter buttons
+    // TODO: add event-listeners to filter and sort
     document.querySelector("[data-filter=cat]").addEventListener("click", showOnlyCats);
     document.querySelector("[data-filter=dog]").addEventListener("click", showOnlyDogs);
     document.querySelector("[data-filter=all]").addEventListener("click", showAllAnimals);
+
+    document.querySelector("[data-sort=name]").addEventListener("click", sortByName);
+    document.querySelector("[data-sort=type]").addEventListener("click", sortByType);
+    document.querySelector("[data-sort=desc]").addEventListener("click", sortByDesc);
+    document.querySelector("[data-sort=age]").addEventListener("click", sortByAge);
 
     loadJSON();
 }
@@ -80,6 +85,58 @@ function showOnlyDogs() {
 function showAllAnimals() {
     console.log("all animals");
     
+    displayList(allAnimals);
+}
+
+function compareName( a, b ) {
+    if( a.name < b.name ) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function compareType( a, b ) {
+    if( a.type < b.type ) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function compareDesc( a, b ) {
+    if( a.desc < b.desc ) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function compareAge( a, b ) {
+    if( a.age < b.age ) {
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function sortByName() {
+    allAnimals.sort( compareName );
+    displayList(allAnimals);
+}
+
+function sortByType() {
+    allAnimals.sort( compareType );
+    displayList(allAnimals);
+}
+
+function sortByDesc() {
+    allAnimals.sort( compareDesc );
+    displayList(allAnimals);
+}
+
+function sortByAge() {
+    allAnimals.sort( compareAge );
     displayList(allAnimals);
 }
 
